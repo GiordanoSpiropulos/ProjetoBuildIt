@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "809817730990",
+    "firebase_url": "https://projeto-plotze-pt2.firebaseio.com",
+    "project_id": "projeto-plotze-pt2",
+    "storage_bucket": "projeto-plotze-pt2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809817730990:android:51b74185dbd6c12f46223f",
+        "android_client_info": {
+          "package_name": "com.example.projeto_plotze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809817730990-l0vh1pkgvur5rnu4r2pbvjfdmg6ibshv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.projeto_plotze",
+            "certificate_hash": "0233e061cb15e16c7467df1366e7087bedb314ba"
+          }
+        },
+        {
+          "client_id": "809817730990-1vt401pb5oee7mc4ajktp9f367bdliei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKZkK1IQiE6idPrOC6lkAb2lpkTU3pJNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809817730990-1vt401pb5oee7mc4ajktp9f367bdliei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
