@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../Controller/DietController/DietController.dart';
+import '../../../Components/DietList/DietList.dart';
 import '../../../Components/AboutAlert/AboutAlert.dart';
 import '../../../assets/fonts/MuscularIcon.dart';
 

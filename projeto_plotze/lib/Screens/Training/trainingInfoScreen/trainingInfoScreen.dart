@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../Components/ListTrain/ListTrain.dart';
 
 class TrainingInfoScreen extends StatefulWidget {
   @override
@@ -9,75 +10,27 @@ class _TrainingInfoScreenState extends State<TrainingInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: ListView(
-          padding: EdgeInsets.fromLTRB(10, 50, 10, 20),
-          children: [
-            Column(
-              children: [
-                Container(
-                  child: Text(
-                    "Nome do exercicio     N° Repetições     N° Séries",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                  padding: EdgeInsets.only(bottom: 10),
-                ),
-                Container(
-                  child: Text(
-                    "Nome do exercicio     N° Repetições     N° Séries",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                  padding: EdgeInsets.only(bottom: 10),
-                ),
-                Container(
-                  child: Text(
-                    "Nome do exercicio     N° Repetições     N° Séries",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                  padding: EdgeInsets.only(bottom: 10),
-                ),
-                Container(
-                  child: Text(
-                    "Nome do exercicio     N° Repetições     N° Séries",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                  padding: EdgeInsets.only(bottom: 10),
-                ),
-              ],
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 30, 30),
+            alignment: Alignment.centerRight,
+            child: RawMaterialButton(
+              fillColor: Color(0xffff8800),
+              shape: CircleBorder(),
+              child: Icon(Icons.add, size: 30, color: Colors.white),
+              onPressed: () {
+                generateRandomExercise();
+              },
             ),
-
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: RaisedButton(
-                color: Color(0xffff8800),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                child: Text(
-                  "Avançar",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            height: 500,
+       
+            child: renderList(context),
+          ),
+        ],
       ),
       appBar: AppBar(
         backgroundColor: Color(0xff003f88),

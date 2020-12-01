@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../Controller/LoginAuth/loginAuth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -6,6 +7,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _userEmail = TextEditingController();
+  final _userPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +25,6 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
           child: Stack(
             children: [
-  
               ListView(
                 children: [
                   Column(
@@ -64,6 +67,7 @@ class _LoginState extends State<Login> {
                         height: 50,
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
+                          controller: _userEmail,
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -80,6 +84,7 @@ class _LoginState extends State<Login> {
                         height: 50,
                         child: TextFormField(
                           obscureText: true,
+                          controller: _userPassword,
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -92,6 +97,7 @@ class _LoginState extends State<Login> {
                       SizedBox(
                         height: 50,
                       ),
+      
                       Container(
                         height: 50,
                         width: 320,
@@ -113,7 +119,8 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/TrainingScreen');
+                              checkLogin(
+                                  _userEmail.text, _userPassword.text, context);
                             },
                           ),
                         ),

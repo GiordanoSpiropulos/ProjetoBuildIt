@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../Controller/MainScreenController/mainScreenController.dart';
+import '../../../Components/ListCard/ListCard.dart';
 import '../../../assets/fonts/MuscularIcon.dart';
 import '../../../Components/AboutAlert/AboutAlert.dart';
 
@@ -20,27 +20,27 @@ class _TrainingScreenState extends State<TrainingScreen> {
           children: [
             Container(
               padding: EdgeInsets.only(left: 10, top: 15),
-              child: Text(
-                "Treino de xxxx",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0),
-              height: 301,
-              child: renderList(context),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10, top: 15),
-              child: Text(
-                "Treino de xxxx",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text(
+                    "Treino de Peito",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  RawMaterialButton(
+                    fillColor: Colors.white,
+                    shape: CircleBorder(),
+                    child: Icon(
+                      Icons.add,
+                      size: 36,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/NewTrainingScreen');
+                    },
+                  ),
+                ],
               ),
             ),
             Container(

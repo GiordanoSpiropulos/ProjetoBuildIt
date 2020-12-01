@@ -1,41 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-Map<String, dynamic> _imagesChest = {
-  "body": [
-    {
-      "id": 1,
-      "imagePath": "lib/assets/img/training1.jpg",
-      "title": 'Treino Iniciante',
-      "time": "15 min",
-      "kcal": "150-250 kCal"
-    },
-    {
-      "id": 2,
-      "imagePath": "lib/assets/img/training2.jpg",
-      "title": 'Treino Intermediario',
-      "time": "23 min",
-      "kcal": "150-250 kCal"
-    },
-    {
-      "id": 3,
-      "imagePath": "lib/assets/img/training3.jpg",
-      "title": 'Treino Avançado',
-      "time": "35 min",
-      "kcal": "150-250 kCal"
-    },
-  ],
-};
+//***************************************************************************/
+//ESSA TELA RENDERIZA OS CARDS DE EXERCICIOS
+//****************************************************************************/
+final firestoreInstance = FirebaseFirestore.instance;
 
+renderCard(var id, var pathImage, var title, var time, var kcal, var context,
+    var length, var index) {
 
-
-renderCard(var pathImage, var title, var time, var kcal,var context) {
   Card renderedCard = Card(
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     child: GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/TrainingInfoScreen');
+
+        Navigator.pushNamed(
+          context,
+          '/TrainingInfoScreen',
+        );
+      },
+      onLongPress: () {
+        Navigator.pushNamed(context, '/EditTrainingScreen', arguments: id.toString());
       },
       child: Stack(
         children: [
@@ -51,7 +38,6 @@ renderCard(var pathImage, var title, var time, var kcal,var context) {
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 20, top: 80),
-          
             child: Text(
               title,
               textAlign: TextAlign.left,
@@ -59,24 +45,22 @@ renderCard(var pathImage, var title, var time, var kcal,var context) {
                 fontSize: 28,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                 shadows: [
+                shadows: [
                   Shadow(
-                      offset: Offset(3.5, 1.5),
-                      blurRadius: 1.0,
-                      color: Color(0xff1a1818),
+                    offset: Offset(3.5, 1.5),
+                    blurRadius: 1.0,
+                    color: Color(0xff1a1818),
                   ),
                 ],
-              
               ),
             ),
           ),
-         
 
           Container(
             alignment: Alignment.bottomLeft,
             padding: EdgeInsets.only(left: 20, bottom: 60),
             child: Text(
-              time,
+              time.toString() + ' min',
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 20,
@@ -97,7 +81,7 @@ renderCard(var pathImage, var title, var time, var kcal,var context) {
             alignment: Alignment.bottomLeft,
             padding: EdgeInsets.only(left: 20, bottom: 30),
             child: Text(
-              kcal,
+              kcal + ' kCal',
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 20,
@@ -119,24 +103,41 @@ renderCard(var pathImage, var title, var time, var kcal,var context) {
   return renderedCard;
 }
 
-renderList(var context) {
-  Widget buildList = ListView.builder(
-    
-      scrollDirection: Axis.horizontal,
-      itemCount: _imagesChest['body'].length,
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
-          width: 300,
-          padding: EdgeInsets.only(left: 15),
-          child: renderCard(
-            _imagesChest['body'][index]['imagePath'],
-            _imagesChest['body'][index]['title'],
-            _imagesChest['body'][index]['time'],
-            _imagesChest['body'][index]['kcal'],
-            context,
-          ),
-        );
-      });
+renderAddCard() {
+  Card addCard = Card(
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    elevation: 5,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    child: GestureDetector(),
+  );
+  return addCard;
+}
 
+renderList(var context) {
+  Widget buildList = StreamBuilder<QuerySnapshot>(
+    stream: firestoreInstance.collection('chestTraining').snapshots(),
+    builder: (context, snapshot) => snapshot.hasData
+        ? ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: snapshot.data.docs?.length ?? 0,
+            itemBuilder: (context, index) => Container(
+              width: 300,
+              padding: EdgeInsets.only(left: 15),
+              child: renderCard(
+                snapshot.data.docs[index].data()['id'],
+                snapshot.data.docs[index].data()['imagePath'],
+                snapshot.data.docs[index].data()['title'],
+                snapshot.data.docs[index].data()['time'],
+                snapshot.data.docs[index].data()['kCal'],
+                context,
+                snapshot.data.docs.length,
+                index,
+              ),
+            ),
+          )
+        : Center(
+            child: CircularProgressIndicator(),
+          ),
+  );
   return buildList;
 }
