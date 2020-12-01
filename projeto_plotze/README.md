@@ -1,6 +1,6 @@
 # projeto_plotze
 
-A new Flutter project.
+Projeto BuildIt (atividade Programação disp movéis)
 
 ## Getting Started
 
